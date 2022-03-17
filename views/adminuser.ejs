@@ -52,8 +52,10 @@
         
        
       </ul>
-      <form class="d-flex" action="/admin" method="GET">
+      <form class="d-flex" action="/admins" method="GET">
         <input class="form-control me-2" type="search" placeholder="Customer Name" name="search" aria-label="Search">
+        <input class="form-control me-2" type="hidden"  value="<%=token%>" name="token" aria-label="Search">
+
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
@@ -118,13 +120,13 @@
 
      <%if (data.name){%>
           
-       <td><img src="<%=data.image%>" height="200" width="300" ></a></td>
+       <td><a href="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/front" class='btn btn-primary btn-sm'>See Image</a></td>
      
 
      <%}%>
   <%if (data.name){%>
 
-       <td><img src="../<%=data.imagerear%>" ></a></td>
+       <td><a href="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/rear" class='btn btn-primary btn-sm'>See Image</a></td>
      
 
      <%}%>

@@ -630,20 +630,85 @@ app.get("/admins",function(req,res){
 
            if(tokens[i].code==req.query.token)
             {
-                 flag=false
-               user.find({},function(err,admins){
+               flag=false 
+               console.log("here")
+               if(!req.query.search){ 
+                user.find({},function(err,admins){
                      if(admins.length>0){
 
-                         res.render("adminuser.ejs",{admins:admins})
+                         res.render("adminuser.ejs",{admins:admins,token:req.query.token})
                       }
                       else{
 
                          res.render("newvery.ejs")
                       }
-             })
-                 break  
+                   })
 
 
+                 
+                }
+                else{
+                                  flag=false
+   
+                  user.find({},function(err,allusers){
+
+                     
+                      var search=req.query.search  
+                      var searches=search.toLowerCase()
+                      var finds=[]
+                      for (var i=0;i<allusers.length;i++){
+
+                                
+                            for (var j=0;j<allusers[i].name.length;j++){
+
+                                 var p=j
+                                 var flags=true 
+                                 for(var s=0;s<searches.length;s++){ 
+                                  if(allusers[i].name[p].toLowerCase()!==searches[s]){
+
+                                           flags=false
+                                           break
+
+
+                                  }
+                                  
+                                  p=p+1
+                                      
+                                }
+                                    
+
+                            if(flags==true){
+
+                                   finds.push(0)   
+                                   user.find({name:{$regex:allusers[i].name,$options:"$i"}},function(err,admins){
+
+                                                                     res.render("adminuser.ejs",{admins:admins,token:req.query.token})
+
+
+
+                                   })   
+
+                                   var allusers=[]
+                                   break
+                            
+                            }   
+                       
+                              }
+
+                      }
+                      
+                      if(finds.length==0){
+
+                          res.render("noadmin.ejs",{token:req.query.token})
+                      }       
+                  
+                  })     
+                
+                }
+
+              
+               break
+            
             }
      }
       if(flag==true){

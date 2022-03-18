@@ -24,6 +24,8 @@
         <form action="/token" method="POST">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">@email:</label>
+            <input type="hidden" class="form-control"  value="<%=token%>" name="token"   required>
+
             <input type="email" class="form-control"  name="username"   required>
           </div>
          
@@ -120,13 +122,29 @@
 
      <%if (data.name){%>
           
-       <td><a href="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/front" class='btn btn-primary btn-sm'>See Image</a></td>
+       <td>
+       <form class="d-flex" action="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/front" method="POST">
+          <input type="hidden" value="<%=token%>" name="token">
+          <button  class='btn btn-primary btn-sm'>See Image</button>
+       </form>         
+       </td>
      
 
      <%}%>
   <%if (data.name){%>
 
-       <td><a href="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/rear" class='btn btn-primary btn-sm'>See Image</a></td>
+       <td>
+
+           
+            <form class="d-flex" action="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/rear" method="POST">
+              <input type="hidden" value="<%=token%>" name="token">
+              <button  class='btn btn-primary btn-sm'>See Image</button>
+            </form>  
+ 
+
+
+
+       </td>
      
 
      <%}%>

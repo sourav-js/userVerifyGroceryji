@@ -584,12 +584,12 @@ app.get("/",function(req,res){
                 html:`-----Hi,welcome to user verification panel<br>your token || recipient ID-----<br>
                         <b>${newtoken}</b>
                         <br>
-                        <a href=https://userverify.groceryji.com/>verify token & sign up</a>
+                        <a href=https://userverify-groceryji.herokuapp.com/>verify token & sign up</a>
                         
                         
                         </form>
                         <br>
-                        <b>Thank you from <a href=https://groceryji.com/>GroceryJi</a></b>
+                        <b>Thank you from <a href=https://groceryji.herokuapp.com/>GroceryJi</a></b>
                         `
             } 
 
@@ -640,7 +640,7 @@ app.get("/admins",function(req,res){
                       }
                       else{
 
-                         res.render("newvery.ejs")
+                         res.render("newvery.ejs",{token:req.query.token})
                       }
                    })
 
@@ -760,7 +760,10 @@ app.get("/updateadmin/:id",function(req,res){
   })
 })
 app.post("/token",function(req,res){
-    var token=Math.floor(Math.random()*123445)
+   token.findOne({code:req.body.token},function(err,tokens){ 
+    if(tokens){ 
+     var token=Math.floor(Math.random()*123445)
+
     user.findOne({email:req.body.username},function(err,info){
     if(info){
      
@@ -792,15 +795,15 @@ app.post("/token",function(req,res){
                 bcc:`grocery.ofc@gmail.com`,
                 to:`${req.body.username}`,
                 subject:"Verification",
-                html:`-----Hi,welcome to user verification panel<br>your token || recipient ID-----<br>
+                html:`-----Hi,welcome to Admin Panel<br>your token || recipient ID-----<br>
                         <b>${token}</b>
                         <br>
-                        <a href="https://admin.groceryji.com/>verify token & sign up</a>
+                        <a href="https://admin-groceryji.herokuapp.com/>verify token & sign up</a>
                         
                         
                         </form>
                         <br>
-                        <b>Thank you from GroceryJi</b>
+                        <b>Thank you from <a href=https://groceryji.herokuapp.com>GroceryJi</a></b>
                         `
             } 
 
@@ -824,7 +827,13 @@ app.post("/token",function(req,res){
 
    }
   })
+   }
+   else{
 
+    req.flash("error","Approved token is required!") 
+    res.redirect("/")
+   }
+  })
 
 })
 

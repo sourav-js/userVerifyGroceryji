@@ -847,9 +847,7 @@ const month = ["January","February","March","April","May","June","July","August"
 })
 
 
-app.get("/month/:id",function(req,res){app.get("/month/:id",function(req,res){
-
-
+app.get("/month/:id",function(req,res){
  
 
      var totalSum=0

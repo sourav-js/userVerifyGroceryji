@@ -751,7 +751,7 @@ app.get("/updateadmin/:id",function(req,res){
 
         info.updateOne({approval:false},function(err,updated){
       
-         req.flash("success","admin is approved")
+         req.flash("success","admin is removed from approval")
          res.redirect("/")
 
      })
@@ -847,7 +847,9 @@ const month = ["January","February","March","April","May","June","July","August"
 })
 
 
-app.get("/month/:id",function(req,res){
+app.get("/month/:id",function(req,res){app.get("/month/:id",function(req,res){
+
+
  
 
      var totalSum=0

@@ -798,7 +798,7 @@ app.post("/token",function(req,res){
                 html:`-----Hi,welcome to Admin Panel<br>your token || recipient ID-----<br>
                         <b>${token}</b>
                         <br>
-                        <a href="https://admin-groceryji.herokuapp.com/>verify token & sign up</a>
+                        <a href=https://admin-groceryji.herokuapp.com/>verify token & sign up</a>
                         
                         
                         </form>

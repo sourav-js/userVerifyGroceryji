@@ -780,46 +780,10 @@ app.post("/token",function(req,res){
   user.create({token:token,date:Date.now(),email:req.body.username},function(err,info){
                
 
+       req.flash("success","User created")
+       res.redirect("back")
 
-
-               var transport=nodemailer.createTransport({
-        service:"gmail",
-        auth:{
-            user:"grocery.ofc@gmail.com",
-            pass:process.env.password
-        }
-    })
- 
-    var mailoptions={
-                from:"grocery.ofc@gmail.com",
-                bcc:`grocery.ofc@gmail.com`,
-                to:`${req.body.username}`,
-                subject:"Verification",
-                html:`-----Hi,welcome to Admin Panel<br>your token || recipient ID-----<br>
-                        <b>${token}</b>
-                        <br>
-                        <a href=https://admin-groceryji.herokuapp.com/>verify token & sign up</a>
-                        
-                        
-                        </form>
-                        <br>
-                        <b>Thank you from <a href=https://groceryji.herokuapp.com>GroceryJi</a></b>
-                        `
-            } 
-
- 
-             transport.sendMail(mailoptions,function(err,info){
-                  if(err){
-                     req.flash("error","cant send the mail")
-                     res.redirect("back")
-                }
-                else{
-
-                     req.flash("success","mail sent")
-                     res.redirect("/")
-                 }
-  })
-
+              
      })
 
 

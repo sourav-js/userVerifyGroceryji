@@ -123,7 +123,7 @@
      <%if (data.name){%>
           
        <td>
-       <form class="d-flex" action="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/front" method="POST">
+       <form class="d-flex" action="http://localhost:3005/picture/<%=data._id%>/front" method="POST">
           <input type="hidden" value="<%=token%>" name="token">
           <button  class='btn btn-primary btn-sm'>See Image</button>
        </form>         
@@ -136,7 +136,7 @@
        <td>
 
            
-            <form class="d-flex" action="https://admin-groceryji.herokuapp.com/picture/<%=data._id%>/rear" method="POST">
+            <form class="d-flex" action="http://localhost:3005/picture/<%=data._id%>/rear" method="POST">
               <input type="hidden" value="<%=token%>" name="token">
               <button  class='btn btn-primary btn-sm'>See Image</button>
             </form>  

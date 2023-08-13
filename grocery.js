@@ -439,42 +439,8 @@ passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
 app.use(function(req,res,next){
- if(req.user) {   
-  user.findById(req.user._id).populate("cart").exec(function(err,users){
-              var sums=0
-              var i=0
-              while (i<users.cart.length){
-              
-
-                  sums=sums+users.cart[i].Price
-                  
-               
-                  i=i+1
-              } 
  
-               users.sum=sums 
-               users.save()
-  
- })
-}
-    if(req.user) {   
-
-
-   user.findById(req.user._id).populate("pops").exec(function(err,users){
-     var totalnoti=0
-     for (var i=0;i<users.pops.length;i++){
-
-         if(users.pops[i].view==""){
-
-             totalnoti=totalnoti+1
-         }
-     }
-    
-     users.notinum=totalnoti
-     users.save()
-   })
-
-} 
+   
  
 
 
@@ -680,7 +646,7 @@ app.get("/admins",function(req,res){
                             if(flags==true){
 
                                    finds.push(0)   
-                                   user.find({name:{$regex:allusers[i].name,$options:"$i"}},function(err,admins){
+                                   user.find({name:{$regex:allusers[i].name,$options:"i"}},function(err,admins){
 
                                                                      res.render("adminuser.ejs",{admins:admins,token:req.query.token})
 
@@ -872,7 +838,7 @@ if (!req.query.search){
                     if (flag==true){
                         console.log(orders[i].name)
                         find.push(0)
-                      order.find({name:{$regex:orders[i].name,$options:"$i"}},function(err,orderf){
+                      order.find({name:{$regex:orders[i].name,$options:"i"}},function(err,orderf){
                          for (var i=0;i<orderf.length;i++){
 
                           if(orderf[i].update!=="Canceled" && orderf[i].month==req.params.id){
@@ -958,7 +924,7 @@ app.get("/vip",function(req,res){
                      p=p+1
                  }
                  if(flag==true){
-                     user.find({name:{$regex:users[i].name,$options:"$i"}},function(err,found){
+                     user.find({name:{$regex:users[i].name,$options:"i"}},function(err,found){
 
                                   res.render("vip.ejs",{users:found,search:req.query.search})
 
@@ -4874,7 +4840,7 @@ else{
                
                  if (flag==true){
                     
-                     product.find({key:{$regex:prods[i].key,$options:"$i"}},function(err,prods){
+                     product.find({key:{$regex:prods[i].key,$options:"i"}},function(err,prods){
          
                        res.render("allproducts.ejs",{prods:prods})
              })
@@ -5170,7 +5136,7 @@ else{
               if (flag==true){
                  find.push(0)
 
-                 order.find({name:{$regex:orders[i].name,$options:"$i"}},function(err,orderf){
+                 order.find({name:{$regex:orders[i].name,$options:"i"}},function(err,orderf){
 
                       var totals=0
                       for (var x=0;x<orderf.length;x++){
